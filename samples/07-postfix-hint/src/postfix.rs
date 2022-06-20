@@ -68,8 +68,8 @@ impl Operator {
 
 impl PostfixConvertor {
     pub fn read_data_from_file(path: &str) -> Result<Vec<Term>, String> {
-        let input =
-            std::fs::read_to_string(path).expect(format!("failed opening file {}", path).as_str());
+        let input = std::fs::read_to_string(path)
+            .map_err(|e| format!("failed opening file '{}' : {}", path, e.to_string()))?;
         PostfixConvertor::read_data(input)
     }
 
